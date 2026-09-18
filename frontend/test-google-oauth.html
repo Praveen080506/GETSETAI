@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Google OAuth</title>
+</head>
+<body>
+    <h1>Google OAuth Test</h1>
+    <div id="google-button"></div>
+    <div id="result"></div>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script>
+        function handleCredentialResponse(response) {
+            console.log('Google credential response:', response);
+            document.getElementById('result').innerHTML = `
+                <h2>Credential Received</h2>
+                <pre>${JSON.stringify(response, null, 2)}</pre>
+            `;
+
+            // Send to backend
+            fetch('http://localhost:5000/api/auth/google', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ credential: response.credential })
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log('Backend response:', data);
+                document.getElementById('result').innerHTML += `
+                    <h2>Backend Response</h2>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML += `
+                    <h2>Error</h2>
+                    <pre>${error.message}</pre>
+                `;
+            });
+        }
+
+        window.onload = function() {
+            console.log('Loading Google Sign-In...');
+            console.log('Current origin:', window.location.origin);
+            google.accounts.id.initialize({
+                client_id: '509974976339-bpan5hceh940oqgki7adq041nnv6gldc.apps.googleusercontent.com',
+                callback: handleCredentialResponse,
+                auto_select: false,
+            });
+
+            google.accounts.id.renderButton(document.getElementById('google-button'), {
+                theme: 'outline',
+                size: 'large',
+                width: '100%',
+                text: 'signin_with',
+                shape: 'rectangular',
+            });
+        };
+    </script>
+</body>
+</html>
