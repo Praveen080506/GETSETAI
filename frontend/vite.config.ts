@@ -16,7 +16,7 @@ export default defineConfig({
     server: {
       port: 5173,
       host: true,
-      allowedHosts:'getsetai-1.onrender.com'
+      allowedHosts:['getsetai-1.onrender.com']
     }
   }
 });
