@@ -1,9 +1,11 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { DollyGallery, type DollyGalleryHandle } from "@/components/ui/dolly-gallery";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import abhishekFront from "@/assets/BackgroundRemove/AbhishekFront.png";
 import abhishekBack from "@/assets/BackgroundRemove/AbhishekBack.png";
+import mishraFront from "@/assets/BackgroundRemove/MishraFront.png";
+import mishraBack from "@/assets/BackgroundRemove/MishraBack.png";
 import bharadwajFront from "@/assets/BackgroundRemove/BharadwajFront.png";
 import bharadwajBack from "@/assets/BackgroundRemove/BharadwajBack.png";
 import kavyaFront from "@/assets/BackgroundRemove/KavyaFront.png";
@@ -120,12 +122,12 @@ const members: TeamMember[] = [
   {
     name: "Bugtha Bharadwaj",
     category: "founder",
-    label: "Director, COO",
+    label: "Director, CMO",
     badge: "Founder & Director",
     department: "Executive Leadership",
     description:
-      "Directs operational architecture, enterprise execution, and nationwide business scaling across all Getsetai delivery verticals.",
-    tags: ["Operations Strategy", "Scale & Execution", "Enterprise Alliances"],
+      "Leads brand strategy, market positioning, customer engagement, and growth initiatives across all Getsetai business verticals.",
+    tags: ["Brand Strategy", "Market Growth", "Customer Engagement"],
     frontImage: bharadwajFront,
     backImage: bharadwajBack,
   },
@@ -140,6 +142,18 @@ const members: TeamMember[] = [
     tags: ["Corporate Vision", "Product Architecture", "AI Ecosystem"],
     frontImage: abhishekFront,
     backImage: abhishekBack,
+  },
+  {
+    name: "Sanidhya Mishra",
+    category: "founder",
+    label: "Director, COO",
+    badge: "Founder & Director",
+    department: "Executive Leadership",
+    description:
+      "Directs operational architecture, enterprise execution, and nationwide business scaling across all Getsetai delivery verticals.",
+    tags: ["Operations Strategy", "Scale & Execution", "Enterprise Alliances"],
+    frontImage: mishraFront,
+    backImage: mishraBack,
   },
   {
     name: "Nidhi Galande",
@@ -311,11 +325,20 @@ function HangingIdCard({ member, theme, isFocused, index }: HangingIdCardProps) 
 }
 
 function TeamPage() {
+  const [isClient, setIsClient] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const galleryRef = useRef<DollyGalleryHandle>(null);
   const activeMember = members[activeIndex] || members[0];
   const activeTheme = CATEGORY_THEMES[activeMember.category];
   const ActiveIcon = activeTheme.icon;
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return null; // Prevent hydration mismatch by only rendering on client
+  }
 
   return (
     <div className="relative min-h-[calc(100vh-4rem)] bg-[var(--background,#050505)] text-[var(--foreground,#fff)] flex flex-col justify-between pt-24 pb-8 overflow-x-clip selection:bg-purple-500/30 w-full">
