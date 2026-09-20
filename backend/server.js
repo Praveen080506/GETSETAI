@@ -8,7 +8,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:5173','https://getsetai-beta.vercel.app/','https://www.getsetai.in/'],
+  origin: ['http://localhost:5173','https://getsetai-beta.vercel.app','https://www.getsetai.in'],
   credentials: true
 }));
 app.use(express.json());
