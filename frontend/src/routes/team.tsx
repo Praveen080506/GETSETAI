@@ -146,7 +146,7 @@ const members: TeamMember[] = [
   {
     name: "Sanidhya Mishra",
     category: "founder",
-    label: "Director, COO",
+    label: "COO",
     badge: "Founder & Director",
     department: "Executive Leadership",
     description:
