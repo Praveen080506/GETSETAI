@@ -499,6 +499,9 @@ export const DollyGallery = forwardRef<DollyGalleryHandle, DollyGalleryProps>(
     const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
       if (e.button !== 0) return;
       const target = e.target as HTMLElement | null;
+      if (target?.closest('a, button, [role="button"], input, textarea, select')) {
+        return;
+      }
       const isOverCard =
         Boolean(target?.closest?.('[data-dolly-card="true"]')) ||
         isHoveredCard.current;
@@ -662,6 +665,10 @@ export const DollyGallery = forwardRef<DollyGalleryHandle, DollyGalleryProps>(
                   isHoveredCard.current = false;
                 }}
                 onClick={(e) => {
+                  const target = e.target as HTMLElement | null;
+                  if (target?.closest('a, button, [role="button"], input, textarea, select')) {
+                    return;
+                  }
                   e.stopPropagation();
                   onItemClick?.(item, originalIndex);
                   // Also dolly to clicked item

@@ -23,9 +23,9 @@ import ramBack from "@/assets/BackgroundRemove/RamBack.png";
 import yuvarajFront from "@/assets/BackgroundRemove/YuvarajFront.png";
 import yuvarajBack from "@/assets/BackgroundRemove/YuvarajBack.png";
 
-import { Crown, HeartHandshake, Network, Terminal } from "lucide-react";
+import { Crown, HeartHandshake, Network, Terminal, Briefcase } from "lucide-react";
 
-type Category = "founder" | "hr" | "community" | "engineering";
+type Category = "founder" | "executive" | "hr" | "community" | "engineering";
 
 interface TeamMember {
   name: string;
@@ -37,6 +37,8 @@ interface TeamMember {
   tags: string[];
   frontImage: string;
   backImage: string;
+  instagramUrl?: string;
+  linkedinUrl?: string;
 }
 
 interface CategoryTheme {
@@ -70,6 +72,21 @@ const CATEGORY_THEMES: Record<Category, CategoryTheme> = {
     orb1: "bg-[#65cff7]/20",
     orb2: "bg-sky-400/12",
     cornerDot: "bg-[#65cff7] shadow-[0_0_12px_rgba(101,207,247,0.85)]",
+  },
+  executive: {
+    name: "Executive Leadership",
+    icon: Briefcase,
+    badgeBg: "bg-gradient-to-r from-orange-400 via-amber-400 to-orange-500 text-black shadow-[0_0_20px_rgba(249,115,22,0.45)]",
+    borderFocused: "border-orange-500/80 shadow-[0_0_70px_rgba(249,115,22,0.35)] bg-gradient-to-br from-neutral-900/98 via-neutral-950/98 to-black",
+    nameGradient: "bg-gradient-to-r from-amber-100 via-orange-300 to-amber-400 bg-clip-text text-transparent drop-shadow-[0_2px_22px_rgba(249,115,22,0.4)]",
+    rolePill: "bg-orange-500/15 text-orange-200 border-orange-400/40 shadow-[0_0_18px_rgba(249,115,22,0.2)]",
+    pulseDot: "bg-orange-400",
+    tagClass: "bg-orange-500/10 text-orange-200/90 border-orange-400/25",
+    activeDot: "w-9 bg-orange-400 shadow-[0_0_16px_rgba(249,115,22,0.85)]",
+    inactiveDot: "bg-orange-400/30 hover:bg-orange-400/50",
+    orb1: "bg-orange-500/20",
+    orb2: "bg-amber-400/12",
+    cornerDot: "bg-orange-400 shadow-[0_0_12px_rgba(249,115,22,0.85)]",
   },
   hr: {
     name: "Human Resources",
@@ -130,6 +147,8 @@ const members: TeamMember[] = [
     tags: ["Brand Strategy", "Market Growth", "Customer Engagement"],
     frontImage: bharadwajFront,
     backImage: bharadwajBack,
+    instagramUrl: "https://www.instagram.com/",
+    linkedinUrl: "https://www.linkedin.com/",
   },
   {
     name: "Abhishek Sahoo",
@@ -142,12 +161,14 @@ const members: TeamMember[] = [
     tags: ["Corporate Vision", "Product Architecture", "AI Ecosystem"],
     frontImage: abhishekFront,
     backImage: abhishekBack,
+    instagramUrl: "https://www.instagram.com/",
+    linkedinUrl: "https://www.linkedin.com/",
   },
   {
     name: "Sanidhya Mishra",
-    category: "founder",
+    category: "executive",
     label: "COO",
-    badge: "Founder & Director",
+    badge: "COO",
     department: "Executive Leadership",
     description:
       "Directs operational architecture, enterprise execution, and nationwide business scaling across all Getsetai delivery verticals.",
@@ -493,6 +514,75 @@ function TeamPage() {
                         ))}
                       </div>
                     </div>
+
+                    {/* Founder Social Links: Conditionally rendered ONLY for Founder & Director with individual member links */}
+                    {member.badge === "Founder & Director" && (member.instagramUrl || member.linkedinUrl) && (
+                      <div className="flex items-center justify-end gap-3 pb-2 pr-2 relative z-30 pointer-events-auto">
+                        {member.instagramUrl && (
+                          <a
+                            href={member.instagramUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${member.name} Instagram`}
+                            className="w-11 h-11 rounded-full bg-neutral-900/80 border border-[#65cff7]/60 shadow-[0_0_18px_rgba(101,207,247,0.35)] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-[#65cff7] hover:shadow-[0_0_24px_rgba(101,207,247,0.6)] cursor-pointer relative z-30 pointer-events-auto"
+                            onPointerDown={(e) => e.stopPropagation()}
+                            onPointerUp={(e) => e.stopPropagation()}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (member.instagramUrl) {
+                                window.open(member.instagramUrl, "_blank", "noopener,noreferrer");
+                              }
+                            }}
+                          >
+                            <svg
+                              className="w-5 h-5 pointer-events-none"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <defs>
+                                <linearGradient id={`ig-gradient-${_index}`} x1="0%" y1="100%" x2="100%" y2="0%">
+                                  <stop offset="0%" stopColor="#f09433" />
+                                  <stop offset="25%" stopColor="#e6683c" />
+                                  <stop offset="50%" stopColor="#dc2743" />
+                                  <stop offset="75%" stopColor="#cc2366" />
+                                  <stop offset="100%" stopColor="#bc1888" />
+                                </linearGradient>
+                              </defs>
+                              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke={`url(#ig-gradient-${_index})`} strokeWidth="2" />
+                              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke={`url(#ig-gradient-${_index})`} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke={`url(#ig-gradient-${_index})`} strokeWidth="2.5" strokeLinecap="round" />
+                            </svg>
+                          </a>
+                        )}
+
+                        {member.linkedinUrl && (
+                          <a
+                            href={member.linkedinUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${member.name} LinkedIn`}
+                            className="w-11 h-11 rounded-full bg-neutral-900/80 border border-[#65cff7]/60 shadow-[0_0_18px_rgba(101,207,247,0.35)] flex items-center justify-center transition-all duration-300 hover:scale-110 hover:border-[#65cff7] hover:shadow-[0_0_24px_rgba(101,207,247,0.6)] cursor-pointer relative z-30 pointer-events-auto"
+                            onPointerDown={(e) => e.stopPropagation()}
+                            onPointerUp={(e) => e.stopPropagation()}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (member.linkedinUrl) {
+                                window.open(member.linkedinUrl, "_blank", "noopener,noreferrer");
+                              }
+                            }}
+                          >
+                            <svg
+                              className="w-5 h-5 fill-[#0077b5] pointer-events-none"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
+                    )}
 
                     {/* Bottom Card Footer Info */}
                     <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-neutral-400">
