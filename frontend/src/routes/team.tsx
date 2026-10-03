@@ -137,20 +137,6 @@ const CATEGORY_THEMES: Record<Category, CategoryTheme> = {
 
 const members: TeamMember[] = [
   {
-    name: "Bugtha Bharadwaj",
-    category: "founder",
-    label: "Director, CMO",
-    badge: "Founder & Director",
-    department: "Executive Leadership",
-    description:
-      "Leads brand strategy, market positioning, customer engagement, and growth initiatives across all Getsetai business verticals.",
-    tags: ["Brand Strategy", "Market Growth", "Customer Engagement"],
-    frontImage: bharadwajFront,
-    backImage: bharadwajBack,
-    instagramUrl: "https://www.instagram.com/b.bharadwaj__21/",
-    linkedinUrl: "https://www.linkedin.com/in/b-bharadwaj-43a829284/",
-  },
-  {
     name: "Abhishek Sahoo",
     category: "founder",
     label: "Director, CEO",
@@ -165,8 +151,22 @@ const members: TeamMember[] = [
     linkedinUrl: "https://www.linkedin.com/in/abhisheksahoo15/",
   },
   {
+    name: "Bugtha Bharadwaj",
+    category: "founder",
+    label: "Director, CMO",
+    badge: "Co-Founder & Director",
+    department: "Executive Leadership",
+    description:
+      "Leads brand strategy, market positioning, customer engagement, and growth initiatives across all Getsetai business verticals.",
+    tags: ["Brand Strategy", "Market Growth", "Customer Engagement"],
+    frontImage: bharadwajFront,
+    backImage: bharadwajBack,
+    instagramUrl: "https://www.instagram.com/b.bharadwaj__21/",
+    linkedinUrl: "https://www.linkedin.com/in/b-bharadwaj-43a829284/",
+  },
+  {
     name: "Sanidhya Mishra",
-    category: "executive",
+    category: "founder",
     label: "COO",
     badge: "Co-Founder & COO",
     department: "Executive Leadership",
@@ -517,8 +517,8 @@ function TeamPage() {
                       </div>
                     </div>
 
-                    {/* Founder Social Links: Conditionally rendered ONLY for Founder & Director with individual member links */}
-                    {member.badge === "Founder & Director" && (member.instagramUrl || member.linkedinUrl) && (
+                    {/* Founder Social Links: Conditionally rendered for Founder & Co-Founder badges with individual member links */}
+                    {(member.badge === "Founder & Director" || member.badge === "Co-Founder & Director" || member.badge === "Co-Founder & COO") && (member.instagramUrl || member.linkedinUrl) && (
                       <div className="flex items-center justify-end gap-3 pb-2 pr-2 relative z-30 pointer-events-auto">
                         {member.instagramUrl && (
                           <a
