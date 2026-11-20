@@ -77,9 +77,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 const SITE_URL = import.meta.env['VITE_SITE_URL'] || "https://www.getsetai.in";
-const SITE_TITLE = "Getsetai Innovations — Digital Innovation with AI & Tech";
-const SITE_DESCRIPTION =
-  "Getsetai Innovations delivers AI-driven software, full-stack development, and enterprise solutions to clients throughout India.";
+const SITE_TITLE = "GetSetAI Innovation";
+const SITE_DESCRIPTION = "Digital Innovation with AI&Tech";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
@@ -98,7 +97,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image", content: `${SITE_URL}/og-image.png` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
-      { property: "og:image:alt", content: "Getsetai Innovations — Digital Innovation with AI & Tech" },
+      { property: "og:image:alt", content: SITE_TITLE },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: SITE_TITLE },
       { name: "twitter:description", content: SITE_DESCRIPTION },
