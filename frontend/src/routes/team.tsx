@@ -150,20 +150,7 @@ const members: TeamMember[] = [
     instagramUrl: "https://www.instagram.com/abhishek_decodes/",
     linkedinUrl: "https://www.linkedin.com/in/abhisheksahoo15/",
   },
-  {
-    name: "Bugtha Bharadwaj",
-    category: "founder",
-    label: "Director, CMO",
-    badge: "Co-Founder & Director",
-    department: "Executive Leadership",
-    description:
-      "Leads brand strategy, market positioning, customer engagement, and growth initiatives across all Getsetai business verticals.",
-    tags: ["Brand Strategy", "Market Growth", "Customer Engagement"],
-    frontImage: bharadwajFront,
-    backImage: bharadwajBack,
-    instagramUrl: "https://www.instagram.com/b.bharadwaj__21/",
-    linkedinUrl: "https://www.linkedin.com/in/b-bharadwaj-43a829284/",
-  },
+
   {
     name: "Sanidhya Mishra",
     category: "founder",

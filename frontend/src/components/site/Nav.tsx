@@ -190,6 +190,7 @@ const links = [
   { to: "/team", label: "Team" },
   { to: "/careers", label: "Careers" },
   { to: "/services", label: "Services" },
+  { label: "Digital Library", href: "https://getsetai-library-seven.vercel.app/", external: true },
   { to: "/contact", label: "Contact" },
 ] as const;
 
@@ -291,17 +292,28 @@ export function Nav() {
               <ul className="flex flex-col gap-1">
                 {links.map((link, i) => (
                   <motion.li
-                    key={link.to}
+                    key={"to" in link ? link.to : link.href}
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7, delay: 0.15 + i * 0.07, ease: EASE.cine }}
                   >
-                    <Link
-                      to={link.to}
-                      className="block text-[clamp(2.5rem,6vw,4rem)] leading-[1.15] tracking-[-0.04em] transition-opacity hover:opacity-50"
-                    >
-                      {link.label}
-                    </Link>
+                    {"to" in link ? (
+                      <Link
+                        to={link.to}
+                        className="block text-[clamp(2.5rem,6vw,4rem)] leading-[1.15] tracking-[-0.04em] transition-opacity hover:opacity-50"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="block text-[clamp(2.5rem,6vw,4rem)] leading-[1.15] tracking-[-0.04em] transition-opacity hover:opacity-50"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </motion.li>
                 ))}
               </ul>

@@ -76,26 +76,38 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const SITE_URL = import.meta.env['VITE_SITE_URL'] || "https://www.getsetai.in";
+const SITE_TITLE = "Getsetai Innovations — Digital Innovation with AI & Tech";
+const SITE_DESCRIPTION =
+  "Getsetai Innovations delivers AI-driven software, full-stack development, and enterprise solutions to clients throughout India.";
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Getsetai Innovations — Digital Innovation with AI & Tech" },
-      {
-        name: "description",
-        content:
-          "Getsetai Innovations delivers AI-driven software, full-stack development, and enterprise solutions to clients throughout India.",
-      },
+      { title: SITE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
       { name: "author", content: "Getsetai Innovations" },
       { name: "theme-color", content: "#111111" },
       { property: "og:site_name", content: "Getsetai Innovations" },
       { property: "og:type", content: "website" },
+      { property: "og:title", content: SITE_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: `${SITE_URL}/og-image.png` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "Getsetai Innovations — Digital Innovation with AI & Tech" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: SITE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "canonical", href: SITE_URL },
     ],
     scripts: [
       {

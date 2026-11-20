@@ -216,6 +216,7 @@ export const footerNav = {
     { label: "Courses", to: "/courses" },
     { label: "Team", to: "/team" },
     { label: "Careers", to: "/careers" },
+    { label: "Digital Library", href: "https://getsetai-library-seven.vercel.app/", external: true },
     { label: "Contact", to: "/contact" },
   ],
   resources: [
